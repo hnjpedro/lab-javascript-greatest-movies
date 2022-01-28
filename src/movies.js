@@ -28,7 +28,11 @@ function scoresAverage(arr) {
     return 0;
   } else {
     const sumScores = arr.reduce(function (sum, scores) {
-      return sum + scores.score;
+      if (scores.score) {
+        return sum + scores.score;
+      } else {
+        return sum;
+      }
     }, 0);
     const avgScores = sumScores / arr.length;
     return Number(avgScores.toFixed(2));
@@ -73,22 +77,21 @@ function orderByYear(arr) {
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
 function orderAlphabetically(arr) {
   const onlyTitles = arr.map((name) => name.title);
-  const topTwenty = onlyTitles.slice(0, 20);
-  const alphOrder = topTwenty.sort(function (a, b) {
-    if (a.title > b.title) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
-  return alphOrder;
+  const alphOrder = onlyTitles.sort();
+  const topTwenty = alphOrder.slice(0, 20);
+  return topTwenty;
 }
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 function turnHoursToMinutes(arr) {
-  const allDurations = arr.map(x => x.duration);
-  const hoursToMinutes = allDurations.charAt(0) * 60;
-  return newArr;
+  const allDurations = arr.slice(0, 3).map((x) => {
+    console.log(x.duration);
+    const hours = Number(x.duration.slice(0, 1)) * 60;
+    const minutes = Number(x.duration.slice(3, 5));
+    x.duration = hours + minutes;
+    return x;
+  });
+  return allDurations;
 }
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
